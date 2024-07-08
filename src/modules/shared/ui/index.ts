@@ -1,5 +1,6 @@
 // src/modules/shared/ui/index.ts
 
+export * from "./typography";
 export * from "./accordion";
 export * from "./alert-dialog";
 export * from "./alert";

@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { QueryClientProvider } from "@/modules/shared/providers";
+import { QueryClientProvider, ThemeProvider } from "@/modules/shared/providers";
 import { Toaster } from "@/modules/shared/ui";
 import type { Metadata } from "next";
 
@@ -19,8 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <QueryClientProvider>{children}</QueryClientProvider>
-        <Toaster />
+        <ThemeProvider enableSystem attribute="class" defaultTheme="system">
+          <QueryClientProvider>{children}</QueryClientProvider>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );
