@@ -27,7 +27,9 @@ This is a [Next.js](https://nextjs.org/) Starter Kit bootstrapped with [`create-
 
 ### Naming Conventions
 
-I like to use the dot-notation with kebab-case, so a component called `UserProfile` would be named `user-profile.component.tsx`, a hook called `useUser` would be named `use-user.hook.ts`, service named `UserService` would be named `user.service.ts`, you get the idea. This makes it super easy to find files and understand what they do.
+I like to use the dot-notation with kebab-case, so a component called `UserProfile` would be named `user-profile.component.tsx`, a hook called `useUser` would be named `use-user.ts`, service named `UserService` would be named `user.service.ts`, you get the idea. This makes it super easy to find files and understand what they do.
+
+The only exception to this are the shared components in `shared/components` as they're one-offs and don't belong to any module.
 
 ### Code Style
 
@@ -64,7 +66,7 @@ src/modules
 │       ├── user-profile.component.tsx
 │       ├── index.ts
 │   ├── hooks
-│       ├── use-user.hook.ts
+│       ├── use-user.ts
 │       ├── index.ts
 │   ├── services
 │       ├── user.service.ts
