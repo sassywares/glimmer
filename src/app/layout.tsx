@@ -1,10 +1,13 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Bricolage_Grotesque } from "next/font/google";
 import { QueryClientProvider, ThemeProvider } from "@/modules/shared/providers";
-import { Toaster } from "@/modules/shared/ui";
+import { Toaster } from "@/modules/shared/components";
 import type { Metadata } from "next";
 
-const inter = Inter({ subsets: ["latin"] });
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,10 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={bricolage.className}>
         <ThemeProvider enableSystem attribute="class" defaultTheme="system">
           <QueryClientProvider>{children}</QueryClientProvider>
-          <Toaster />
+          <Toaster richColors position="top-center" />
         </ThemeProvider>
       </body>
     </html>
