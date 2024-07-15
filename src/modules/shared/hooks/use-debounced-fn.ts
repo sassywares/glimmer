@@ -9,7 +9,7 @@ type CallbackFunction = (...args: any[]) => void;
 
 export function useDebouncedFn(
   fn: CallbackFunction,
-  delay = defaultDebounceDelay
+  delay = defaultDebounceDelay,
 ) {
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
@@ -22,7 +22,7 @@ export function useDebouncedFn(
         fn(...args);
       }, delay);
     },
-    [fn, delay]
+    [fn, delay],
   );
 
   useEffect(() => {

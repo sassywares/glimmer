@@ -20,7 +20,7 @@ export function useMediaQuery(breakpoint: Breakpoint): boolean {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(
-      `(min-width: ${breakpoints[breakpoint]}px)`
+      `(min-width: ${breakpoints[breakpoint]}px)`,
     );
 
     const handleChange = (e: MediaQueryListEvent) => {
