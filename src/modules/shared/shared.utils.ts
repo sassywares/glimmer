@@ -1,5 +1,5 @@
-import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { clsx, type ClassValue } from "clsx";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -35,7 +35,7 @@ export function isMouseEvent(event: React.MouseEvent | React.TouchEvent) {
   return event.nativeEvent instanceof MouseEvent;
 }
 
-export function dispatchStorageEvent(key: string, newValue?: string | null) {
+export function dispatchStorageEvent(key: string, newValue?: null | string) {
   window.dispatchEvent(new StorageEvent("storage", { key, newValue }));
 }
 

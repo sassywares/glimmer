@@ -1,27 +1,30 @@
-import { UseMutationOptions, useMutation } from "@tanstack/react-query";
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { toast } from "sonner";
 import { baseService } from "../shared.config";
 import { ServiceError } from "../shared.types";
 import { PromiseToastOptions, defaultPromiseToastOptions } from "../components";
 
+import { toast } from "sonner";
+import { useMutation, UseMutationOptions } from "@tanstack/react-query";
+import { AxiosInstance, AxiosResponse, AxiosRequestConfig } from "axios";
+
 export type UseMutationClientAxiosOptions<Data> = Pick<
   AxiosRequestConfig<Data>,
-  // Pick as you need, make sure to also extract below or else these will be forwarded to useMutation instead of axios.request
-  "url" | "data" | "method" | "headers"
+  | "url"
+  | "data" // Pick as you need, make sure to also extract below or else these will be forwarded to useMutation instead of axios.request
+  | "method"
+  | "headers"
 >;
 
 export type UseMutationClientOptions<Data, Response> =
   UseMutationClientAxiosOptions<Data> &
     UseMutationOptions<Response, ServiceError, Data> & {
+      /** Optionally, you can also disable toasts entirely, this lets you handle toasts as you please */
+      disableToast?: boolean;
+
       /** The service to use, defaults to baseService */
       service?: AxiosInstance;
 
       /** The options to pass to the toast.promise function, defaults to {@link defaultPromiseToastOptions} */
       toastOptions?: PromiseToastOptions;
-
-      /** Optionally, you can also disable toasts entirely, this lets you handle toasts as you please */
-      disableToast?: boolean;
     };
 
 export type UseMutationClientFunctionProps<Data> = {

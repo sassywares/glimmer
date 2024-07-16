@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+
 import { defaultDebounceDelay } from "../shared.config";
 
 /**
@@ -10,7 +11,7 @@ import { defaultDebounceDelay } from "../shared.config";
  */
 export function useDebouncedState<T>(value: T, delay = defaultDebounceDelay) {
   const [debouncedValue, setDebouncedValue] = useState(value);
-  const handler = useRef<NodeJS.Timeout | null>(null);
+  const handler = useRef<null | NodeJS.Timeout>(null);
 
   useEffect(() => {
     handler.current = setTimeout(() => {

@@ -1,6 +1,6 @@
 "use client";
 
-import { PropsWithChildren, useLayoutEffect, useRef } from "react";
+import { useRef, useLayoutEffect, PropsWithChildren } from "react";
 
 /**
  * A component that simulates typing out text.
@@ -20,9 +20,9 @@ export function TypingAnimation({
   delay = 0,
   ...props
 }: PropsWithChildren<
-  React.ComponentPropsWithoutRef<"div"> & {
+  {
     delay?: number;
-  }
+  } & React.ComponentPropsWithoutRef<"div">
 >) {
   const ref = useRef<HTMLDivElement>(null);
 

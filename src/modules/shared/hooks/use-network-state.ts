@@ -1,4 +1,5 @@
 import { useRef, useSyncExternalStore } from "react";
+
 import { isShallowEqual } from "../shared.utils";
 
 const getConnection = () => {
@@ -49,13 +50,13 @@ export function useNetworkState() {
     const connection = getConnection();
 
     const nextState = {
-      downlink: connection?.downlink,
-      downlinkMax: connection?.downlinkMax,
-      effectiveType: connection?.effectiveType,
       online,
       rtt: connection?.rtt,
-      saveData: connection?.saveData,
       type: connection?.type,
+      downlink: connection?.downlink,
+      saveData: connection?.saveData,
+      downlinkMax: connection?.downlinkMax,
+      effectiveType: connection?.effectiveType,
     };
 
     if (isShallowEqual(cache.current, nextState)) {

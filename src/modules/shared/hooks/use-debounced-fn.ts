@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
+import { useRef, useEffect, useCallback } from "react";
+
 import { defaultDebounceDelay } from "../shared.config";
 
 type CallbackFunction = (...args: any[]) => void;

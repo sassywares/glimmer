@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import { cn } from "@/modules/shared/shared.utils";
 
 const Table = React.forwardRef<
@@ -106,11 +107,11 @@ TableCaption.displayName = "TableCaption";
 
 export {
   Table,
-  TableHeader,
-  TableBody,
-  TableFooter,
-  TableHead,
   TableRow,
+  TableBody,
+  TableHead,
   TableCell,
+  TableHeader,
+  TableFooter,
   TableCaption,
 };

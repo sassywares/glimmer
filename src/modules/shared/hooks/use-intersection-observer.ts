@@ -1,8 +1,8 @@
-import { useCallback, useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 
 export interface UseIntersectionObserverOptions {
   rootMargin?: string;
-  root?: Element | null;
+  root?: null | Element;
   threshold?: number | number[];
 }
 
@@ -27,7 +27,7 @@ export interface UseIntersectionObserverOptions {
 export function useIntersectionObserver(
   options?: UseIntersectionObserverOptions,
 ) {
-  const { threshold = 1, root = null, rootMargin = "0px" } = options || {};
+  const { root = null, threshold = 1, rootMargin = "0px" } = options || {};
 
   const [entry, setEntry] = useState<IntersectionObserverEntry>();
   const previousObserver = useRef<IntersectionObserver>();
@@ -44,7 +44,7 @@ export function useIntersectionObserver(
           ([entry]) => {
             setEntry(entry);
           },
-          { threshold, root, rootMargin },
+          { root, threshold, rootMargin },
         );
 
         observer.observe(node);

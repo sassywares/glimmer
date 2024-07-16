@@ -1,10 +1,11 @@
 "use client";
 
+import { defaultStaleTime } from "../shared.config";
+
 import {
   QueryClient,
   QueryClientProvider as QueryProvider,
 } from "@tanstack/react-query";
-import { defaultStaleTime } from "../shared.config";
 
 const queryClient = new QueryClient({
   defaultOptions: {

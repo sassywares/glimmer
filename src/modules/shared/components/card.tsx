@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import { cn } from "@/modules/shared/shared.utils";
 
 const Card = React.forwardRef<
@@ -77,9 +78,9 @@ CardFooter.displayName = "CardFooter";
 
 export {
   Card,
+  CardTitle,
   CardHeader,
   CardFooter,
-  CardTitle,
-  CardDescription,
   CardContent,
+  CardDescription,
 };

@@ -4,6 +4,9 @@ import axios from "axios";
 // Constants
 // =============================================================================
 
+export const defaultLocale = "en";
+export const locales = [defaultLocale, "de"];
+
 export const defaultDebounceDelay = 500;
 
 /** 30 minutes */

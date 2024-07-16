@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useSyncExternalStore } from "react";
+import { useEffect, useCallback, useSyncExternalStore } from "react";
+
 import { dispatchStorageEvent } from "../shared.utils";
 
 const setLocalStorageItem = (key: string, value: any) => {

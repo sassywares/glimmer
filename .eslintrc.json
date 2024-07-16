@@ -2,6 +2,129 @@
   "extends": [
     "prettier",
     "next/core-web-vitals",
+    "plugin:perfectionist/recommended-natural",
+    "plugin:perfectionist/recommended-line-length",
+    "plugin:perfectionist/recommended-alphabetical",
     "plugin:@tanstack/eslint-plugin-query/recommended"
-  ]
+  ],
+  "plugins": ["perfectionist"],
+  "rules": {
+    "perfectionist/sort-array-includes": [
+      "error",
+      {
+        "order": "asc",
+        "spread-last": true,
+        "type": "line-length"
+      }
+    ],
+    "perfectionist/sort-enums": [
+      "error",
+      {
+        "order": "asc",
+        "type": "line-length"
+      }
+    ],
+    "perfectionist/sort-exports": [
+      "error",
+      {
+        "order": "asc",
+        "type": "line-length"
+      }
+    ],
+    "perfectionist/sort-imports": [
+      "error",
+      {
+        "order": "asc",
+        "type": "line-length",
+        "groups": [
+          ["style", "side-effect-style"],
+          ["react", "next"],
+          "builtin",
+          ["side-effect", "parent", "sibling", "index"],
+          "external",
+          "internal",
+          "unknown",
+          "object",
+          [
+            "type",
+            "internal-type",
+            "parent-type",
+            "sibling-type",
+            "index-type",
+            "react-type",
+            "next-type"
+          ]
+        ],
+        "custom-groups": {
+          "value": {
+            "react": ["react", "react/**", "react-**"],
+            "next": ["next", "next/**", "next-**", "next-**/**"]
+          },
+          "type": {
+            "react-type": ["react", "react/**", "react-**"],
+            "next-type": ["next", "next/**", "next-**", "next-**/**"]
+          }
+        },
+        "newlines-between": "always",
+        "internal-pattern": ["@/**"]
+      }
+    ],
+    "perfectionist/sort-interfaces": [
+      "error",
+      {
+        "order": "asc",
+        "type": "line-length"
+      }
+    ],
+    "perfectionist/sort-jsx-props": [
+      "error",
+      {
+        "order": "asc",
+        "type": "line-length",
+        "groups": ["shorthand", "unknown", "multiline"]
+      }
+    ],
+    "perfectionist/sort-named-exports": [
+      "error",
+      {
+        "order": "asc",
+        "type": "line-length"
+      }
+    ],
+    "perfectionist/sort-named-imports": [
+      "error",
+      {
+        "order": "asc",
+        "type": "line-length"
+      }
+    ],
+    "perfectionist/sort-object-types": [
+      "error",
+      {
+        "order": "asc",
+        "type": "line-length"
+      }
+    ],
+    "perfectionist/sort-objects": [
+      "error",
+      {
+        "order": "asc",
+        "type": "line-length"
+      }
+    ],
+    "perfectionist/sort-union-types": [
+      "error",
+      {
+        "order": "asc",
+        "type": "line-length"
+      }
+    ],
+    "perfectionist/sort-intersection-types": [
+      "error",
+      {
+        "order": "asc",
+        "type": "line-length"
+      }
+    ]
+  }
 }

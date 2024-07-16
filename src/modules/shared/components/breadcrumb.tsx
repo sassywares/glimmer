@@ -1,6 +1,8 @@
 import * as React from "react";
+
 import { Slot } from "@radix-ui/react-slot";
 import { ChevronRight, MoreHorizontal } from "lucide-react";
+
 import { cn } from "@/modules/shared/shared.utils";
 
 const Breadcrumb = React.forwardRef<
@@ -40,9 +42,9 @@ BreadcrumbItem.displayName = "BreadcrumbItem";
 
 const BreadcrumbLink = React.forwardRef<
   HTMLAnchorElement,
-  React.ComponentPropsWithoutRef<"a"> & {
+  {
     asChild?: boolean;
-  }
+  } & React.ComponentPropsWithoutRef<"a">
 >(({ asChild, className, ...props }, ref) => {
   const Comp = asChild ? Slot : "a";
 
@@ -63,8 +65,8 @@ const BreadcrumbPage = React.forwardRef<
   <span
     ref={ref}
     role="link"
-    aria-disabled="true"
     aria-current="page"
+    aria-disabled="true"
     className={cn("font-normal text-foreground", className)}
     {...props}
   />
@@ -77,8 +79,8 @@ const BreadcrumbSeparator = ({
   ...props
 }: React.ComponentProps<"li">) => (
   <li
-    role="presentation"
     aria-hidden="true"
+    role="presentation"
     className={cn("[&>svg]:size-3.5", className)}
     {...props}
   >
@@ -92,8 +94,8 @@ const BreadcrumbEllipsis = ({
   ...props
 }: React.ComponentProps<"span">) => (
   <span
-    role="presentation"
     aria-hidden="true"
+    role="presentation"
     className={cn("flex h-9 w-9 items-center justify-center", className)}
     {...props}
   >
@@ -109,6 +111,6 @@ export {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbPage,
-  BreadcrumbSeparator,
   BreadcrumbEllipsis,
+  BreadcrumbSeparator,
 };
