@@ -22,6 +22,9 @@ export type UseQueryClientOptions<Response, Data> =
     };
 
 /**
+ * A hook to use a query in combination with a service.
+ * This hook essentially elimiates the need to write a custom query function for each service.
+ *
  * @example
  * const { data, isLoading, error } = useQueryClient({
  *  url: "/api/user",

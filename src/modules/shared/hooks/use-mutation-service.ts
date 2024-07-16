@@ -19,6 +19,9 @@ export type UseMutationClientOptions<Data, Response> =
 
       /** The options to pass to the toast.promise function, defaults to {@link defaultPromiseToastOptions} */
       toastOptions?: PromiseToastOptions;
+
+      /** Optionally, you can also disable toasts entirely, this lets you handle toasts as you please */
+      disableToast?: boolean;
     };
 
 export type UseMutationClientFunctionProps<Data> = {
@@ -27,6 +30,9 @@ export type UseMutationClientFunctionProps<Data> = {
 };
 
 /**
+ * A hook to use a mutation in combination with a service.
+ * This hook essentially elimiates the need to write a custom mutation function for each service.
+ *
  * @example
  *
  * const { mutate, isLoading, error } = useMutationClient({
@@ -53,6 +59,7 @@ export function useMutationService<Data = unknown, Response = unknown>(
     data,
     method,
     headers,
+    disableToast = false,
     service = baseService,
     toastOptions = defaultPromiseToastOptions,
     ...mutationOptions
@@ -60,11 +67,10 @@ export function useMutationService<Data = unknown, Response = unknown>(
 
   // Define the mutation function with an object containing data and optional config
   // This optional config can be used to provide additional axios settings at the time of mutation
-  const mutationFn = async ({
-    data,
-    config,
-  }: UseMutationClientFunctionProps<Data>): Promise<Response> => {
-    toast.dismiss(); // Dismiss any existing toasts
+  const mutationFn = async (
+    props?: UseMutationClientFunctionProps<Data>,
+  ): Promise<Response> => {
+    const { data, config } = props || {};
 
     const promise = service.request({
       url,
@@ -74,8 +80,13 @@ export function useMutationService<Data = unknown, Response = unknown>(
       ...config, // Spread the config to allow overriding default settings
     });
 
-    // Show a toast while the promise is pending
-    toast.promise(promise, toastOptions);
+    if (!disableToast) {
+      // Dismiss any existing toasts
+      toast.dismiss();
+
+      // Show a toast while the promise is pending
+      toast.promise(promise, toastOptions);
+    }
 
     // Await the promise and return the data
     const response: AxiosResponse<Response> = await promise;
