@@ -1,9 +1,9 @@
+import { UseMutationOptions, useMutation } from "@tanstack/react-query";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { baseService } from "../shared.config";
-import { defaultPromiseToastOptions, PromiseToastOptions } from "../components";
-import { ServiceError } from "../shared.types";
 import { toast } from "sonner";
-import { useMutation, UseMutationOptions } from "@tanstack/react-query";
+import { baseService } from "../shared.config";
+import { ServiceError } from "../shared.types";
+import { PromiseToastOptions, defaultPromiseToastOptions } from "../components";
 
 export type UseMutationClientAxiosOptions<Data> = Pick<
   AxiosRequestConfig<Data>,

@@ -1,8 +1,8 @@
-import "./globals.css";
 import { Bricolage_Grotesque } from "next/font/google";
-import { QueryClientProvider, ThemeProvider } from "@/modules/shared/providers";
-import { Toaster } from "@/modules/shared/components";
 import type { Metadata } from "next";
+import "./globals.css";
+import { Toaster } from "@/modules/shared/components";
+import { QueryClientProvider, ThemeProvider } from "@/modules/shared/providers";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],

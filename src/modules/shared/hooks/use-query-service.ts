@@ -1,5 +1,5 @@
 // src/modules/shared/hooks/use-query-service.ts
-
+import { UseQueryOptions, useQuery } from "@tanstack/react-query";
 import {
   AxiosError,
   AxiosInstance,
@@ -7,7 +7,6 @@ import {
   AxiosResponse,
 } from "axios";
 import { baseService } from "../shared.config";
-import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 
 export type UseQueryClientAxiosOptions<Data> = Pick<
   AxiosRequestConfig<Data>,

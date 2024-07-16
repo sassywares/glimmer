@@ -1,12 +1,37 @@
 // src/modules/shared/providers/query-client-provider.tsx
-
 "use client";
 
-import { defaultStaleTime } from "../shared.config";
 import {
   QueryClient,
   QueryClientProvider as QueryProvider,
 } from "@tanstack/react-query";
+import { defaultStaleTime } from "../shared.config";
+
+// src/modules/shared/providers/query-client-provider.tsx
+
+// src/modules/shared/providers/query-client-provider.tsx
+
+// src/modules/shared/providers/query-client-provider.tsx
+
+// src/modules/shared/providers/query-client-provider.tsx
+
+// src/modules/shared/providers/query-client-provider.tsx
+
+// src/modules/shared/providers/query-client-provider.tsx
+
+// src/modules/shared/providers/query-client-provider.tsx
+
+// src/modules/shared/providers/query-client-provider.tsx
+
+// src/modules/shared/providers/query-client-provider.tsx
+
+// src/modules/shared/providers/query-client-provider.tsx
+
+// src/modules/shared/providers/query-client-provider.tsx
+
+// src/modules/shared/providers/query-client-provider.tsx
+
+// src/modules/shared/providers/query-client-provider.tsx
 
 const queryClient = new QueryClient({
   defaultOptions: {

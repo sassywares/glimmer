@@ -1,8 +1,9 @@
 "use client";
 
 import * as React from "react";
+import { PopoverProps } from "@radix-ui/react-popover";
 import { Check, ChevronsUpDown } from "lucide-react";
-
+import { cn } from "../shared.utils";
 import { Button } from "./button";
 import {
   Command,
@@ -12,8 +13,6 @@ import {
   CommandItem,
 } from "./command";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
-import { cn } from "../shared.utils";
-import { PopoverProps } from "@radix-ui/react-popover";
 
 export type ComboboxProps<Option> = PopoverProps & {
   /** Whether an option is disabled */
