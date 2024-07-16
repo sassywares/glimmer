@@ -1,5 +1,6 @@
 {
-  "HomePage": {
-    "title": "Hello world!"
+  "Metadata": {
+    "title": "Sassy Next Starter 💅",
+    "description": "Beautiful, batteries-included Next.js starter with a focus on DX and performance."
   }
 }
