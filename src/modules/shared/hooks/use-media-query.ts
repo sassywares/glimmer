@@ -1,33 +1,6 @@
-// src/modules/shared/hooks/use-media-query.ts
 "use client";
 
 import { useEffect, useState } from "react";
-
-// src/modules/shared/hooks/use-media-query.ts
-
-// src/modules/shared/hooks/use-media-query.ts
-
-// src/modules/shared/hooks/use-media-query.ts
-
-// src/modules/shared/hooks/use-media-query.ts
-
-// src/modules/shared/hooks/use-media-query.ts
-
-// src/modules/shared/hooks/use-media-query.ts
-
-// src/modules/shared/hooks/use-media-query.ts
-
-// src/modules/shared/hooks/use-media-query.ts
-
-// src/modules/shared/hooks/use-media-query.ts
-
-// src/modules/shared/hooks/use-media-query.ts
-
-// src/modules/shared/hooks/use-media-query.ts
-
-// src/modules/shared/hooks/use-media-query.ts
-
-// src/modules/shared/hooks/use-media-query.ts
 
 type Breakpoint = "sm" | "md" | "lg" | "xl" | "2xl";
 

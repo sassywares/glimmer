@@ -1,4 +1,3 @@
-// src/modules/shared/hooks/use-query-service.ts
 import { UseQueryOptions, useQuery } from "@tanstack/react-query";
 import {
   AxiosError,

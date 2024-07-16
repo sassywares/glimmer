@@ -1,37 +1,15 @@
-// src/modules/shared/hooks/use-debounced-fn.ts
 "use client";
 
 import { useCallback, useEffect, useRef } from "react";
 import { defaultDebounceDelay } from "../shared.config";
 
-// src/modules/shared/hooks/use-debounced-fn.ts
-
-// src/modules/shared/hooks/use-debounced-fn.ts
-
-// src/modules/shared/hooks/use-debounced-fn.ts
-
-// src/modules/shared/hooks/use-debounced-fn.ts
-
-// src/modules/shared/hooks/use-debounced-fn.ts
-
-// src/modules/shared/hooks/use-debounced-fn.ts
-
-// src/modules/shared/hooks/use-debounced-fn.ts
-
-// src/modules/shared/hooks/use-debounced-fn.ts
-
-// src/modules/shared/hooks/use-debounced-fn.ts
-
-// src/modules/shared/hooks/use-debounced-fn.ts
-
-// src/modules/shared/hooks/use-debounced-fn.ts
-
-// src/modules/shared/hooks/use-debounced-fn.ts
-
-// src/modules/shared/hooks/use-debounced-fn.ts
-
 type CallbackFunction = (...args: any[]) => void;
 
+/**
+ * A hook that returns a debounced version of the provided function.
+ * @param fn The function to debounce
+ * @param delay The delay in milliseconds
+ */
 export function useDebouncedFn(
   fn: CallbackFunction,
   delay = defaultDebounceDelay,

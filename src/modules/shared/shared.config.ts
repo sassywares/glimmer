@@ -1,4 +1,3 @@
-// src/modules/shared/shared.config.ts
 import axios from "axios";
 
 // =============================================================================
