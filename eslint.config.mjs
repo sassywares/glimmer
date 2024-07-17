@@ -1,15 +1,15 @@
+import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { FlatCompat } from "@eslint/eslintrc";
 
 import js from "@eslint/js";
-import path from "node:path";
+import { FlatCompat } from "@eslint/eslintrc";
 import perfectionist from "eslint-plugin-perfectionist";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
-  allConfig: js.configs.all,
   baseDirectory: __dirname,
+  allConfig: js.configs.all,
   recommendedConfig: js.configs.recommended,
 });
 
@@ -24,15 +24,6 @@ export default [
   ),
   {
     rules: {
-      "perfectionist/sort-array-includes": [
-        "error",
-        {
-          order: "asc",
-          "spread-last": true,
-          type: "line-length",
-        },
-      ],
-
       "perfectionist/sort-enums": [
         "error",
         {
@@ -49,46 +40,11 @@ export default [
         },
       ],
 
-      "perfectionist/sort-imports": [
+      "perfectionist/sort-objects": [
         "error",
         {
           order: "asc",
           type: "line-length",
-
-          groups: [
-            ["style", "side-effect-style"],
-            ["react", "next"],
-            "builtin",
-            ["side-effect", "parent", "sibling", "index"],
-            "external",
-            "internal",
-            "unknown",
-            "object",
-            [
-              "type",
-              "internal-type",
-              "parent-type",
-              "sibling-type",
-              "index-type",
-              "react-type",
-              "next-type",
-            ],
-          ],
-
-          "custom-groups": {
-            value: {
-              react: ["react", "react/**", "react-**"],
-              next: ["next", "next/**", "next-**", "next-**/**"],
-            },
-
-            type: {
-              "react-type": ["react", "react/**", "react-**"],
-              "next-type": ["next", "next/**", "next-**", "next-**/**"],
-            },
-          },
-
-          "newlines-between": "always",
-          "internal-pattern": ["@/**"],
         },
       ],
 
@@ -100,12 +56,19 @@ export default [
         },
       ],
 
-      "perfectionist/sort-jsx-props": [
+      "perfectionist/sort-union-types": [
         "error",
         {
           order: "asc",
           type: "line-length",
-          groups: ["shorthand", "unknown", "multiline"],
+        },
+      ],
+
+      "perfectionist/sort-object-types": [
+        "error",
+        {
+          order: "asc",
+          type: "line-length",
         },
       ],
 
@@ -125,30 +88,6 @@ export default [
         },
       ],
 
-      "perfectionist/sort-object-types": [
-        "error",
-        {
-          order: "asc",
-          type: "line-length",
-        },
-      ],
-
-      "perfectionist/sort-objects": [
-        "error",
-        {
-          order: "asc",
-          type: "line-length",
-        },
-      ],
-
-      "perfectionist/sort-union-types": [
-        "error",
-        {
-          order: "asc",
-          type: "line-length",
-        },
-      ],
-
       "perfectionist/sort-intersection-types": [
         "error",
         {
@@ -156,6 +95,25 @@ export default [
           type: "line-length",
         },
       ],
+
+      "perfectionist/sort-array-includes": [
+        "error",
+        {
+          order: "asc",
+          "spread-last": true,
+          type: "line-length",
+        },
+      ],
+
+      "perfectionist/sort-jsx-props": [
+        "error",
+        {
+          order: "asc",
+          type: "line-length",
+          groups: ["shorthand", "unknown", "multiline"],
+        },
+      ],
+
       // Consistently import navigation APIs from `@/navigation`
       "no-restricted-imports": [
         "error",
@@ -165,13 +123,55 @@ export default [
         },
         {
           name: "next/navigation",
+          message: "Please import from `@/navigation` instead.",
           importNames: [
             "redirect",
             "permanentRedirect",
             "useRouter",
             "usePathname",
           ],
-          message: "Please import from `@/navigation` instead.",
+        },
+      ],
+      "perfectionist/sort-imports": [
+        "error",
+        {
+          order: "asc",
+          type: "line-length",
+
+          "newlines-between": "always",
+
+          "internal-pattern": ["@/**"],
+
+          "custom-groups": {
+            value: {
+              react: ["react", "react/**", "react-**"],
+              next: ["next", "next/**", "next-**", "next-**/**"],
+            },
+
+            type: {
+              "react-type": ["react", "react/**", "react-**"],
+              "next-type": ["next", "next/**", "next-**", "next-**/**"],
+            },
+          },
+          groups: [
+            ["style", "side-effect-style"],
+            ["react", "next"],
+            "builtin",
+            ["side-effect", "parent", "sibling", "index"],
+            "external",
+            "internal",
+            "unknown",
+            "object",
+            [
+              "type",
+              "internal-type",
+              "parent-type",
+              "sibling-type",
+              "index-type",
+              "react-type",
+              "next-type",
+            ],
+          ],
         },
       ],
     },

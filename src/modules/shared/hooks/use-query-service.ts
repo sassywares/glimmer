@@ -1,31 +1,29 @@
 import { sharedService } from "../services";
 
-import { useQuery, UseQueryOptions } from "@tanstack/react-query";
+import { AxiosInstance, AxiosResponse, AxiosRequestConfig } from "axios";
 import {
-  AxiosError,
-  AxiosInstance,
-  AxiosResponse,
-  AxiosRequestConfig,
-} from "axios";
+  useQuery,
+  QueryFunction,
+  UseQueryOptions,
+} from "@tanstack/react-query";
 
-export type UseQueryClientAxiosOptions<Data> = Pick<
+import type { ServiceError } from "../shared.types";
+
+export type UseQueryServiceAxiosOptions<Data> = Pick<
   AxiosRequestConfig<Data>,
-  "url" | "method" | "headers"
+  "url" | "data" | "method" | "headers"
 >;
 
-export type UseQueryClientOptions<Response, Data> =
-  UseQueryClientAxiosOptions<Data> &
-    UseQueryOptions<Response, AxiosError, Data> & {
+export type UseQueryServiceOptions<Data, Response> =
+  UseQueryServiceAxiosOptions<Data> &
+    UseQueryOptions<Response, ServiceError> & {
       /** The service to use, defaults to baseService */
       service?: AxiosInstance;
     };
 
 /**
- * A hook to use a query in combination with a service.
- * This hook essentially elimiates the need to write a custom query function for each service.
- *
  * @example
- * const { data, isLoading, error } = useQueryClient({
+ * const { data, isLoading, error } = useQueryService({
  *  url: "/api/user",
  *  enabled: !!token,
  *  select: (data) => data.user,
@@ -34,16 +32,18 @@ export type UseQueryClientOptions<Response, Data> =
  *  }
  * }
  */
-export function useQueryService<Data = any, Response = any>({
+export function useQueryService<Data = unknown, Response = unknown>({
   url,
+  data,
   headers,
   method = "GET",
   service = sharedService,
   ...queryOptions
-}: UseQueryClientOptions<Response, Data>) {
-  const queryFn = async (): Promise<Response> => {
+}: UseQueryServiceOptions<Data, Response>) {
+  const queryFn: QueryFunction<Response> = async (): Promise<Response> => {
     const response: AxiosResponse<Response> = await service.request({
       url,
+      data,
       method,
       headers,
     });
@@ -51,7 +51,7 @@ export function useQueryService<Data = any, Response = any>({
     return response.data;
   };
 
-  return useQuery<Response, AxiosError, Data>({
+  return useQuery<Response, ServiceError>({
     queryFn,
     ...queryOptions,
   });

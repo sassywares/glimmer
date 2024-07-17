@@ -1,23 +1,26 @@
 "use client";
 
-import { apiRoutes } from "@/routes";
-import { useQueryService } from "@/modules/shared/hooks";
+import { notFound } from "next/navigation";
+import { useTranslations } from "next-intl";
+
+import { useUserById } from "@/modules/user/hooks";
 
 export default function UserPage({
   params: { id },
 }: {
   params: { id: string };
 }) {
-  const url = apiRoutes.v1.user(id);
+  const t = useTranslations("Status.Messages");
 
-  const { data, isError, isLoading } = useQueryService({
-    url,
-    queryKey: [url],
-  });
+  const { data, isError, isLoading } = useUserById(id);
 
-  if (isError) return <div>Failed to load</div>;
+  if (isError) return <div>{t("error")}</div>;
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>{t("loading")}</div>;
+
+  if (!data) {
+    notFound();
+  }
 
   return (
     <div>
