@@ -1,8 +1,9 @@
 "use client";
 
 import { useTheme } from "next-themes";
+import { useTranslations } from "next-intl";
 
-import { getServiceErrorMessage } from "../shared.types";
+import { getServiceErrorMessage } from "../shared.utils";
 
 import { toast, Toaster as Sonner } from "sonner";
 
@@ -33,10 +34,14 @@ const Toaster = ({ ...props }: ToasterProps) => {
 
 type PromiseToastOptions = Parameters<typeof toast.promise>["1"];
 
-const defaultPromiseToastOptions: PromiseToastOptions = {
-  loading: "Loading...",
-  success: "Action completed successfully",
-  error: (error) => getServiceErrorMessage(error) || "Something went wrong",
-};
+function useDefaultPromiseToastOptions(): PromiseToastOptions {
+  const t = useTranslations("Status.Messages");
 
-export { Toaster, type PromiseToastOptions, defaultPromiseToastOptions };
+  return {
+    loading: t("loading"),
+    success: t("success"),
+    error: (error) => getServiceErrorMessage(error) || t("error"),
+  };
+}
+
+export { Toaster, type PromiseToastOptions, useDefaultPromiseToastOptions };

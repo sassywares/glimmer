@@ -2,5 +2,16 @@
   "Metadata": {
     "title": "Sassy Next Starter 💅",
     "description": "Beautiful, batteries-included Next.js starter with a focus on DX and performance."
+  },
+  "Status": {
+    "Messages": {
+      "loading": "Loading...",
+      "success": "Action completed successfully",
+      "error": "Something went wrong, please try again"
+    }
+  },
+  "NotFoundPage": {
+    "title": "404",
+    "description": "Page not found"
   }
 }

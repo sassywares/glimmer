@@ -1,4 +1,4 @@
-import { baseService } from "../shared.config";
+import { sharedService } from "../services";
 
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 import {
@@ -38,7 +38,7 @@ export function useQueryService<Data = any, Response = any>({
   url,
   headers,
   method = "GET",
-  service = baseService,
+  service = sharedService,
   ...queryOptions
 }: UseQueryClientOptions<Response, Data>) {
   const queryFn = async (): Promise<Response> => {

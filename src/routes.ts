@@ -1,6 +1,12 @@
 export const routes = {
-  users: "/users",
-  user: (id: string) => `/users/${id}`,
+  rsc: {
+    users: "/rsc/users",
+    user: (id: string) => `/rsc/users/${id}`,
+  },
+  reactQuery: {
+    users: "/react-query/users",
+    user: (id: string) => `/react-query/users/${id}`,
+  },
 };
 
 export const apiRoutes = {

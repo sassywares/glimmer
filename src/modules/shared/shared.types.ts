@@ -2,21 +2,19 @@ import { AxiosError } from "axios";
 
 /** The type of error your service throws */
 export type ServiceError = AxiosError<{
-  code: number;
+  code: string;
   message: string;
 }>;
 
-export function isServiceError(error: unknown): error is ServiceError {
-  return (
-    (error as ServiceError)?.isAxiosError &&
-    (error as ServiceError)?.response?.data?.code !== undefined
-  );
+export interface PageParams {
+  locale: string;
 }
 
-export function getServiceErrorMessage(
-  error: ServiceError,
-): string | undefined {
-  return isServiceError(error)
-    ? error.response?.data?.message
-    : (error as AxiosError).message;
+export interface PageProps {
+  params: PageParams;
+}
+
+export interface LayoutProps {
+  params: PageParams;
+  children: React.ReactNode;
 }

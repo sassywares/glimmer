@@ -1,6 +1,9 @@
-import { baseService } from "../shared.config";
+import { sharedService } from "../services";
 import { ServiceError } from "../shared.types";
-import { PromiseToastOptions, defaultPromiseToastOptions } from "../components";
+import {
+  PromiseToastOptions,
+  useDefaultPromiseToastOptions,
+} from "../components";
 
 import { toast } from "sonner";
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
@@ -20,7 +23,7 @@ export type UseMutationClientOptions<Data, Response> =
       /** Optionally, you can also disable toasts entirely, this lets you handle toasts as you please */
       disableToast?: boolean;
 
-      /** The service to use, defaults to baseService */
+      /** The service to use, defaults to sharedService */
       service?: AxiosInstance;
 
       /** The options to pass to the toast.promise function, defaults to {@link defaultPromiseToastOptions} */
@@ -62,11 +65,13 @@ export function useMutationService<Data = unknown, Response = unknown>(
     data,
     method,
     headers,
+    toastOptions,
     disableToast = false,
-    service = baseService,
-    toastOptions = defaultPromiseToastOptions,
+    service = sharedService,
     ...mutationOptions
   } = options || {};
+
+  const defaultPromiseToastOptions = useDefaultPromiseToastOptions();
 
   // Define the mutation function with an object containing data and optional config
   // This optional config can be used to provide additional axios settings at the time of mutation
@@ -88,7 +93,10 @@ export function useMutationService<Data = unknown, Response = unknown>(
       toast.dismiss();
 
       // Show a toast while the promise is pending
-      toast.promise(promise, toastOptions);
+      toast.promise(promise, {
+        ...defaultPromiseToastOptions,
+        ...toastOptions,
+      });
     }
 
     // Await the promise and return the data
