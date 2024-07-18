@@ -2,16 +2,16 @@
 
 import * as React from "react";
 
-import { Button } from "./button";
-import { cn } from "../shared.utils";
-import { Popover, PopoverContent, PopoverTrigger } from "./popover";
+import { Button } from "../button";
+import { cn } from "../../shared.utils";
+import { Popover, PopoverContent, PopoverTrigger } from "../popover";
 import {
   Command,
   CommandItem,
   CommandEmpty,
   CommandGroup,
   CommandInput,
-} from "./command";
+} from "../command";
 
 import { Check, ChevronsUpDown } from "lucide-react";
 import { PopoverProps } from "@radix-ui/react-popover";

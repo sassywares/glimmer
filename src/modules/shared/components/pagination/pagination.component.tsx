@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ButtonProps, buttonVariants } from "./button";
+import { ButtonProps, buttonVariants } from "../button";
 
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
 

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { Button } from "./button";
+import { Button } from "../button";
 
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import useEmblaCarousel, {

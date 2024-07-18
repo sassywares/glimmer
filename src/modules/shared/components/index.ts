@@ -1,5 +1,3 @@
-// src/modules/shared/ui/index.ts
-
 export * from "./card";
 export * from "./form";
 export * from "./tabs";
@@ -34,10 +32,10 @@ export * from "./accordion";
 export * from "./input-otp";
 export * from "./resizable";
 export * from "./separator";
-export * from "./typography";
 export * from "./breadcrumb";
 export * from "./hover-card";
 export * from "./pagination";
+export * from "./typography";
 export * from "./collapsible";
 export * from "./radio-group";
 export * from "./scroll-area";
@@ -47,3 +45,4 @@ export * from "./context-menu";
 export * from "./toggle-group";
 export * from "./dropdown-menu";
 export * from "./navigation-menu";
+export * from "./typing-animation";
