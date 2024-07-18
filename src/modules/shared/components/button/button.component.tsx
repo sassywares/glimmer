@@ -1,12 +1,13 @@
 import * as React from "react";
 
+import { Loader2 } from "lucide-react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/modules/shared/shared.utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center gap-2 justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     defaultVariants: {
       size: "default",
@@ -15,9 +16,9 @@ const buttonVariants = cva(
     variants: {
       size: {
         icon: "h-10 w-10",
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
+        default: "h-10 px-4 py-2 [&>svg]:w-5 [&>svg]:h-5",
+        sm: "h-9 rounded-md px-3 [&>svg]:w-4 [&>svg]:h-4",
+        lg: "h-11 rounded-md px-8 [&>svg]:w-6 [&>svg]:h-6",
       },
       variant: {
         ghost: "hover:bg-accent hover:text-accent-foreground",
@@ -54,4 +55,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 Button.displayName = "Button";
 
-export { Button, buttonVariants };
+const LoadingButton = React.forwardRef<
+  HTMLButtonElement,
+  ButtonProps & {
+    loading?: boolean;
+  }
+>(({ children, loading = false, disabled = false, ...props }, ref) => (
+  <Button ref={ref} {...props} disabled={disabled || loading}>
+    <Loader2 className="animate-spin" />
+    {children}
+  </Button>
+));
+LoadingButton.displayName = "Loading Button";
+
+export { Button, LoadingButton, buttonVariants };

@@ -3,7 +3,7 @@
 import { useTheme } from "next-themes";
 import { useTranslations } from "next-intl";
 
-import { getServiceErrorMessage } from "../shared.utils";
+import { getServiceErrorMessage } from "../../shared.utils";
 
 import { toast, Toaster as Sonner } from "sonner";
 

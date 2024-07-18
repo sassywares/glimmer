@@ -10,7 +10,7 @@ import {
   ControllerProps,
 } from "react-hook-form";
 
-import { Label } from "./label";
+import { Label } from "../label";
 
 import { Slot } from "@radix-ui/react-slot";
 import * as LabelPrimitive from "@radix-ui/react-label";

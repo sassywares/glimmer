@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { Dialog, DialogContent } from "./dialog";
+import { Dialog, DialogContent } from "../dialog";
 
 import { Search } from "lucide-react";
 import { Command as CommandPrimitive } from "cmdk";

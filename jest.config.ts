@@ -13,26 +13,17 @@ const createJestConfig = nextJest({
 });
 
 const config: Config = {
-  // Automatically clear mock calls, instances, contexts and results before every test
   clearMocks: true,
-
-  // Indicates whether the coverage information should be collected while executing the test
+  preset: "ts-jest",
   collectCoverage: true,
-
-  // The test environment that will be used for testing
   testEnvironment: "jsdom",
-
-  // The directory where Jest should output its coverage files
-  coverageDirectory: "src/__tests__/coverage",
-
-  // A list of paths to directories that Jest should use to search for files in
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
-
-  // A map from regular expressions to module names that allow to stub out resources with a single module
+  coverageDirectory: "src/__tests__/unit/coverage",
   moduleNameMapper: {
-    // ...
     "^@/(.*)$": "<rootDir>/src/$1",
   },
+  testPathIgnorePatterns: ["/node_modules/", "/.next/", "/e2e/"],
+  testMatch: ["**/?(*.)+(spec|test).[tj]sx", "**/?(*.)+(spec|test).ts"],
 };
 
 export default createJestConfig(config);
