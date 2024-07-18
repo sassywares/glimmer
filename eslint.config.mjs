@@ -3,7 +3,6 @@ import { fileURLToPath } from "node:url";
 
 import js from "@eslint/js";
 import { FlatCompat } from "@eslint/eslintrc";
-import perfectionist from "eslint-plugin-perfectionist";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -13,7 +12,7 @@ const compat = new FlatCompat({
   recommendedConfig: js.configs.recommended,
 });
 
-export default [
+const config = [
   ...compat.extends(
     "prettier",
     "next/core-web-vitals",
@@ -22,6 +21,9 @@ export default [
     "plugin:perfectionist/recommended-alphabetical",
     "plugin:@tanstack/eslint-plugin-query/recommended",
   ),
+  {
+    ignores: ["node_modules/*", ".next/*", "out/*", "build/*", "dist/*"],
+  },
   {
     rules: {
       "perfectionist/sort-enums": [
@@ -177,3 +179,5 @@ export default [
     },
   },
 ];
+
+export default config;
