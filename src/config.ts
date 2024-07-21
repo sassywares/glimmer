@@ -12,3 +12,16 @@ export const pathnames: Pathnames<typeof locales> = {
 };
 
 export const localePrefix: LocalePrefix<typeof locales> = "always";
+
+export interface Config {
+  BASE_URL: string;
+}
+
+export const config: Config = {
+  BASE_URL: getConfig("NEXT_PUBLIC_BASE_URL", "http://localhost:3000"),
+};
+
+function getConfig(key: string, defaultValue = ""): string {
+  const envValue = process.env[key];
+  return envValue ?? defaultValue;
+}

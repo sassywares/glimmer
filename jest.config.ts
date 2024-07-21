@@ -17,12 +17,12 @@ const config: Config = {
   preset: "ts-jest",
   collectCoverage: true,
   testEnvironment: "jsdom",
+  coverageDirectory: "<rootDir>/jest/coverage",
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
-  coverageDirectory: "src/__tests__/unit/coverage",
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
   },
-  testPathIgnorePatterns: ["/node_modules/", "/.next/", "/e2e/"],
+  testPathIgnorePatterns: ["/node_modules/", "/cypress/", "/.next/"],
   testMatch: ["**/?(*.)+(spec|test).[tj]sx", "**/?(*.)+(spec|test).ts"],
 };
 
