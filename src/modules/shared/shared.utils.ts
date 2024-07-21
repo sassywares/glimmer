@@ -4,9 +4,16 @@ import { AxiosError } from "axios";
 import { twMerge } from "tailwind-merge";
 import { clsx, type ClassValue } from "clsx";
 
+// =============================================================================
+// Styling
+// =============================================================================
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+// =============================================================================
+// Services
+// =============================================================================
 
 export function isServiceError(error: unknown): error is ServiceError {
   return (
@@ -22,6 +29,10 @@ export function getServiceErrorMessage(
     ? error.response?.data?.message
     : (error as AxiosError).message;
 }
+
+// =============================================================================
+// Common
+// =============================================================================
 
 export function isShallowEqual(
   object1: Record<any, any>,
@@ -42,6 +53,10 @@ export function isShallowEqual(
 
   return true;
 }
+
+// =============================================================================
+// DOM / BOM
+// =============================================================================
 
 export function isTouchEvent(nativeEvent: Event) {
   return window.TouchEvent

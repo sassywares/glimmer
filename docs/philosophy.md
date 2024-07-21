@@ -1,10 +1,38 @@
-# Best Practices
+# Philosophy
 
 The idea behind ✨ Glimmer is to give you more than what you need, so that you never run out of options and you never need to waste time setting things up.
 
 With that being said, a healthy, production-ready app is always consistent in its architecture and highly opinionated in its design, following are the best practices that ensure a robust DX and Development workflow:
 
-## Folder Structure
+## i18n
+
+Always keep your strings outside your codebase, always. Even if you don't have multiple languages to support, it's always better to not litter your code with strings.
+
+To begin, go to `app/config.ts` and update the `locales` constant with your locales. Keep `en` if you don't need multiple languages. Then, go to the root folder and remove/add your locales to the `messages` directory.
+
+To confirm if things are working, run `pnpm build` once.
+
+From here, you're good to go, the docs will help you out for the most part, like for the 98% part, here's the 1%:
+
+1. Use translations in server components with `const t = await getTranslations('Namespace')`
+2. Use tranlations in client components with `const t = useTranslations('Namespace')`
+
+`Namespace` is the name of the object to use, check out [the docs](https://next-intl-docs.vercel.app/) for more.
+
+And the remaining 1%:
+
+1. In your `layout.tsx` and `page.tsx` files, if you're using static generation the file is a server component (doesn't have `use client` at the top), you'll have to forward the `locale` param from the page params to a function named `unstable_setRequestLocale`, see an example in the [users page](/src/app/[locale]/rsc/users/page.tsx)
+2. For client components you can simply use the `useTranslations` hook and you'll be good to go, no need for specifying any locale.
+
+## Styling
+
+Let's end the never-ending quest to find the perfect CSS solution: It doesn't exist. But, my favorite solution for years now is Tailwind CSS, combine it with Shadcn UI and you have 100% control over your codebase while also having a design system that's easy to maintain.
+
+As for components, I like keeping my Shadcn components inside the shared module, and then using them wherever I want. All shared components (navbar, footer, etc.) should be placed inside the shared module as well. This will allow you to not worry about useless drama and keep a clean codebase.
+
+As for styling, use tailwind variants for variants, the `cn` function for conditional classes, and tailwind for everything else. ✨ Glimmer comes with `prettier-plugin-tailwindcss` configured, so you don't have to worry about organizing your classes, just write them and let Prettier do the rest.
+
+## DDD (Domain-Driven Design)
 
 I religiously follow DDD (Domain-Driven Design) after seeing almost all the other architecures fail at scale for React applications.
 
@@ -56,7 +84,7 @@ You can't use Context.Provider in React Server Components, each of the providers
 - A provider component that's just a wrapper around Context.Provider
 - Optionally, an HOC to wrap any component in the same context, dope.
 
-### Services
+#### Services
 
 You won't need a whole directory, mostly, because you might not have multiple services, so a `user.service.ts` would suffice as well. The main goal of a service is to provide server-side query/mutation logic.
 
@@ -74,7 +102,7 @@ In a server-only context, your functions might include direct queries to your da
 
 Read more about data fetching [below](#data-fetching)
 
-### Hooks
+#### Hooks
 
 In my opinion, hooks are just functions, and they should be treated as such. They should do one task and be pure. Following are the 2 use-cases for hooks in my app:
 
@@ -96,7 +124,47 @@ Read more about data fetching [below](#data-fetching)
 
 The second use-case is general, maybe you want to display a user's email if their name is absent, you can create a simple hook called `use-user-name.ts` and use it for this very module.
 
-## Naming Conventions
+## Testing
+
+I love unit and e2e testing, integration not so much. I have yet to discover the true benefits of integration testing, but I'm sure I'll get there soon.
+
+Until then, I love how simple it is to test individual units with Jest and how fun it is to test whole workflows using Cypress.
+
+### Unit Testing
+
+I like keeping each unit (component, hook, service) in a folder of its own, with a .test.ts(x) file right text to it. This way, you can easily find the tests for a specific unit, and you can easily find the unit for a specific test (I don't know if that last bit even makes sense).
+
+```bash
+components/
+  |_user-card/
+    |_index.ts
+    |_user-card.component.tsx
+    |_user-card.component.test.tsx
+```
+
+Jest is configured to read these files, so you don't have to worry about anything, just write your tests and run `pnpm test` to see the magic happen.
+
+### E2E Testing
+
+Cypress is the best choice for E2E testing, and I've configured it to work with ✨ Glimmer. You can run the tests using `pnpm e2e` and `pnpm e2e:watch` to see the tests in action.
+
+Cypress comes with an opinionated structure, and I like to keep it that way. You can find the tests in the `cypress/e2e` directory, and the fixtures in the `cypress/fixtures` directory.
+
+For an example test of the example users pages, check out the [RSC suite](/cypress/e2e/rsc/users.cy.js) and the [React Query suite](/cypress/e2e/react-query/users.cy.js).
+
+## Linting
+
+The ESLint config uses the plugins from [Perfectionist](https://eslint-plugin-perfectionist.azat.io/). Coincidentally, I've also been called a perfectionist many times by my colleagues. I guess it's about time I embrace that and start producing near-perfect code.
+
+You can always modify the eslint config to your liking since you literally own the whole template.
+
+Run `pnpm lint` to run a formal linting check on your codebase, and `pnpm format` to format your codebase. Most (like 99%) of the formatting errors will be resolved by the format command.
+
+If you don't like how strict and opinionated the linting is, you can always modify the `.eslintrc.json` file to your liking.
+
+If you want to completely remove the `perfectionist` plugin, you can do so by uninstalling it and removing all relevant rules from the `.eslintrc.json` file.
+
+## Conventions
 
 I like using constants wherever I can, and use camelCase for pretty much everything other than types, interfaces, and classes.
 
@@ -114,27 +182,52 @@ So, a typical `utils.ts` will become `user.utils.ts`, until you need multiple ut
 
 The same can be applied to any set of files. Typically, start with just a simple module and add files as you go, don't overwhelm yourself and keep remember that the goal is to have fun while developing at lightspeed.
 
-## i18n
+### Components
 
-I'm using [Next-Intl](https://next-intl-docs.vercel.app/) for i18n and it's awesome.
+Don't export components as default (other than Next.js' pages), always use named exports and the function keyword. This will allow you to easily find the component's definition and usage, and will also allow you to easily refactor the component into a hook or a provider if needed.
 
-Even if you don't have multiple languages to support, Next-Intl offers a great way to manage strings, and it's always better to not litter your code with strings.
+Always export a component's props as an interface, no matter how simple they may be.
 
-To begin, go to `app/config.ts` and update the `locales` constant with your locales. Keep `en` if you don't need multiple languages. Then, go to the root folder and remove/add your locales to the `messages` directory.
+```tsx
+export interface UserCardProps {
+  user: User;
+}
 
-To confirm if things are working, run `pnpm build` once.
+export function UserCard({ user }: UserProps) {...}
+```
 
-From here, you're good to go, the docs will help you out for the most part, like for the 98% part, here's the 1%:
+Always use services in Server Components instead of fetching directly from the API, this will allow you to easily switch to a different data-fetching method in the future.
 
-1. Use translations in server components with `const t = await getTranslations('Namespace')`
-2. Use tranlations in client components with `const t = useTranslations('Namespace')`
+```tsx
+export interface UserDetailsPageProps {
+  params: {
+    id: string;
+  }
+}
 
-`Namespace` is the name of the object to use, check out [the docs](https://next-intl-docs.vercel.app/) for more.
+export default async function UserDetailsPage({ params: { id } }: UserDetailsPageProps) {
+  const user = await getUserById(id)
 
-And the other 1%:
+  if(!user) notFound() // Next.js built-in function
 
-1. In your `layout.tsx` and `page.tsx` files, if you're using static generation the file is a server component (doesn't have `use client` at the top), you'll have to forward the `locale` param from the page params to a function named `unstable_setRequestLocale`, see an example in the [users page](/src/app/[locale]/rsc/users/page.tsx)
-2. For client components you can simply use the `useTranslations` hook and you'll be good to go, no need for specifying any locale.
+  return <UserCard user={user} />
+}
+```
+
+### Typography
+
+✨ Glimmer has a `Typography` component ready for you to use with a consistent font size, line height, and font family across your app. You can use it as follows:
+
+```tsx
+import { Typography } from "@/modules/shared/components";
+
+<Typography variant="h1">Hello, world!</Typography>
+
+// Render any tag
+<Typography as="h2" variant="h1">Hello, world!</Typography>
+```
+
+This is just one of the many glimpses of sass you'll find in ✨ Glimmer, of course you can always just open the [file](/src/modules/shared/components/typography.component.tsx) and modify anything you want.
 
 ## Data fetching
 
@@ -245,4 +338,4 @@ and voila, you are good to go!
 
 ---
 
-That wraps up the best practices for ✨ Glimmer (so far), there is a lot more coming, please stay tuned and stay sassy!
+That wraps up the philosophy for ✨ Glimmer (so far), there is a lot more coming, please stay tuned and stay sassy!
