@@ -3,7 +3,7 @@ import { useState, useCallback } from "react";
 import { oldSchoolCopy } from "../shared.utils";
 
 /**
- * Courtesy of {@link https://usehooks.com/useclipboard}
+ * Courtesy of {@link https://usehooks.com/usecopytoclipboard}
  *
  * @returns A tuple containing the copied value and a function to copy a value to the clipboard
  *
