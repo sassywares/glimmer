@@ -14,9 +14,15 @@
       },
       {
         "name": "next/navigation",
-        "message": "Please import from `@/navigation` instead.",
+        "message": "Please import from `@/i18n/routing` instead.",
         // next-intl exports wrappers around these 3 APIs
         "importNames": ["redirect", "useRouter", "usePathname"]
+      },
+      {
+        "name": "next/navigation",
+        "message": "Please import from `@/hooks/use-search-params` instead.",
+        // useSearchParams is a supercharged version of next/navigation's useSearchParams
+        "importNames": ["useSearchParams"]
       }
     ]
   }
