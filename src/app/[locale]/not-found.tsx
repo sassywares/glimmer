@@ -1,12 +1,12 @@
 import { useTranslations } from "next-intl";
 
 export default function NotFoundPage() {
-  const t = useTranslations("NotFoundPage");
+  const t = useTranslations();
 
   return (
     <>
-      <h1>{t("title")}</h1>
-      <p>{t("description")}</p>
+      <h1>{t("phrases.notFound")}</h1>
+      <p>{t("sentences.pageNotFound")}</p>
     </>
   );
 }

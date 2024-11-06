@@ -1,9 +1,8 @@
-// eslint-disable-next-line no-restricted-imports
-import { redirect } from "next/navigation";
-
-import { defaultLocale } from "@/config";
+import { redirect } from "@/i18n/routing";
+import { getLocale } from "next-intl/server";
 
 // This page only renders when the app is built statically (output: 'export')
-export default function RootPage() {
-  redirect(`/${defaultLocale}`);
+export default async function RootPage() {
+  const locale = await getLocale();
+  redirect({ locale, href: "/" });
 }

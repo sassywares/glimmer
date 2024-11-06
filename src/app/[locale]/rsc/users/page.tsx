@@ -1,33 +1,29 @@
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 
+import { PageWithI18n } from "@/i18n/page-with-i18n";
+import { Link } from "@/i18n/routing";
+import { userService } from "@/modules/user/user.service";
 import { routes } from "@/routes";
-import { Link } from "@/navigation";
-import { getUsers } from "@/modules/user/services";
-import { Button } from "@/modules/shared/components";
-import { PageProps } from "@/modules/shared/shared.types";
 
-export default async function UsersPage({ params: { locale } }: PageProps) {
-  // Enable static rendering
-  unstable_setRequestLocale(locale);
+export default PageWithI18n(async () => {
+  const t = await getTranslations("sentences");
 
-  const t = await getTranslations("Status.Messages");
+  const users = await userService.get();
 
-  const users = await getUsers();
-
-  if (!users) return <div>{t("error")}</div>;
+  if (!users) return <div>{t("somethingWentWrong")}</div>;
 
   return (
-    <div>
+    <div className="prose dark:prose-invert">
       <h1>Users</h1>
       <ul>
         {users.map((user: { id: string; name: string }) => (
           <li key={user.id}>
-            <Button asChild>
+            <button>
               <Link href={routes.rsc.user(user.id)}>{user.name}</Link>
-            </Button>
+            </button>
           </li>
         ))}
       </ul>
     </div>
   );
-}
+});

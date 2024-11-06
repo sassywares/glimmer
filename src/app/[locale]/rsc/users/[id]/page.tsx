@@ -1,20 +1,19 @@
+import { userService } from "@/modules/user/user.service";
 import { notFound } from "next/navigation";
-
-import { getUserById } from "@/modules/user/services";
 
 export default async function UserPage({
   params: { id },
 }: {
   params: { id: string };
 }) {
-  const user = await getUserById(id);
+  const user = await userService.getById(id);
 
   if (!user) {
     notFound();
   }
 
   return (
-    <div>
+    <div className="prose dark:prose-invert">
       <h1>User</h1>
       <p>{user.name}</p>
     </div>

@@ -202,15 +202,17 @@ Always use services in Server Components instead of fetching directly from the A
 export interface UserDetailsPageProps {
   params: {
     id: string;
-  }
+  };
 }
 
-export default async function UserDetailsPage({ params: { id } }: UserDetailsPageProps) {
-  const user = await getUserById(id)
+export default async function UserDetailsPage({
+  params: { id },
+}: UserDetailsPageProps) {
+  const user = await getUserById(id);
 
-  if(!user) notFound() // Next.js built-in function
+  if (!user) notFound(); // Next.js built-in function
 
-  return <UserCard user={user} />
+  return <UserCard user={user} />;
 }
 ```
 

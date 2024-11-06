@@ -1,12 +1,7 @@
+import { PageWithI18n } from "@/i18n/page-with-i18n";
 import Image from "next/image";
-import { unstable_setRequestLocale } from "next-intl/server";
 
-import type { PageProps } from "@/modules/shared/shared.types";
-
-export default function HomePage({ params: { locale } }: PageProps) {
-  // Enable static rendering
-  unstable_setRequestLocale(locale);
-
+export default PageWithI18n(() => {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -116,4 +111,4 @@ export default function HomePage({ params: { locale } }: PageProps) {
       </div>
     </main>
   );
-}
+});

@@ -1,32 +1,27 @@
+import { GeistSans } from "geist/font/sans";
 import { NextIntlClientProvider } from "next-intl";
-import { getTranslations } from "next-intl/server";
-import { Bricolage_Grotesque } from "next/font/google";
-import { getMessages, unstable_setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 
 import { getLangDir } from "rtl-detect";
 
-import { locales } from "@/config";
-import { Toaster } from "@/modules/shared/components";
-import { ThemeProvider, QueryClientProvider } from "@/modules/shared/providers";
-
+import { config } from "@/config";
+import { routing } from "@/i18n/routing";
+import { QueryClientProvider } from "@/providers/query-client-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
 import type { Metadata } from "next";
-import type { PageParams, LayoutProps } from "@/modules/shared/shared.types";
+import { notFound } from "next/navigation";
+import { LayoutProps } from "./types";
 
-const bricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
+import { Toaster } from "sonner";
 
 export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
+  return config.i18n.locales.map((locale) => ({ locale }));
 }
 
 export async function generateMetadata({
   params: { locale },
-}: {
-  params: PageParams;
-}): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: "Metadata" });
+}: LayoutProps): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: "metadata" });
 
   return {
     title: t("title"),
@@ -34,22 +29,23 @@ export async function generateMetadata({
   };
 }
 
-export default async function HomeLayout({
+export default async function LocaleLayout({
   children,
   params: { locale },
 }: LayoutProps) {
   const direction = getLangDir(locale);
 
-  // Enable static rendering
-  unstable_setRequestLocale(locale);
+  // Ensure that the incoming `locale` is valid
+  if (!routing.locales.includes(locale as any)) {
+    notFound();
+  }
 
-  // Providing all messages to the client
-  // side is the easiest way to get started
+  // Providing all messages to the client side is the easiest way to get started
   const messages = await getMessages();
 
   return (
     <html lang={locale}>
-      <body dir={direction} className={bricolage.className}>
+      <body dir={direction} className={GeistSans.className}>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider enableSystem attribute="class" defaultTheme="system">
             <QueryClientProvider>{children}</QueryClientProvider>
