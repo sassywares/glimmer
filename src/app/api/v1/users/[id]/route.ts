@@ -1,9 +1,9 @@
-import { getUserById } from "@/modules/user/services";
+import { userService } from "@/modules/user/user.service";
 
 export async function GET(
-  request: Request,
+  _: Request,
   { params: { id } }: { params: { id: string } },
 ) {
-  const user = await getUserById(id);
+  const user = await userService.getById(id);
   return Response.json(user);
 }
