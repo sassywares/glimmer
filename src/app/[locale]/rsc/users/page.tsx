@@ -1,11 +1,10 @@
 import { getTranslations } from "next-intl/server";
 
-import { PageWithI18n } from "@/i18n/page-with-i18n";
 import { Link } from "@/i18n/routing";
 import { userService } from "@/modules/user/user.service";
 import { routes } from "@/routes";
 
-export default PageWithI18n(async () => {
+export default async function UsersPage() {
   const t = await getTranslations("sentences");
 
   const users = await userService.get();
@@ -26,4 +25,4 @@ export default PageWithI18n(async () => {
       </ul>
     </div>
   );
-});
+}

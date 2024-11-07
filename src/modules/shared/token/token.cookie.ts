@@ -1,15 +1,18 @@
 "use server";
 
+import { prefix } from "@/storage";
 import { cookies } from "next/headers";
 
+const key = `${prefix}.token`;
+
 export async function getTokenFromCookies(): Promise<string | null> {
-  return cookies().get("token")?.value ?? null;
+  return (await cookies()).get(key)?.value ?? null;
 }
 
 export async function setTokenInCookies(value: string): Promise<void> {
-  cookies().set("token", value);
+  (await cookies()).set(key, value);
 }
 
 export async function removeTokenFromCookies(): Promise<void> {
-  cookies().delete("token");
+  (await cookies()).delete(key);
 }

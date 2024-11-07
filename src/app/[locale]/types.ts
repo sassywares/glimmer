@@ -1,15 +1,15 @@
 import { PropsWithChildren } from "react";
 
-export type PageParams = {
+export type PageParams<T = {}> = T & {
   locale: string;
 };
 
-export type PageProps = Readonly<{
-  params: PageParams;
+export type PageProps<Params = PageParams> = Readonly<{
+  params: Promise<Params>;
 }>;
 
-export type LayoutProps = Readonly<
+export type LayoutProps<Params = PageParams> = Readonly<
   PropsWithChildren<{
-    params: PageParams;
+    params: Promise<Params>;
   }>
 >;

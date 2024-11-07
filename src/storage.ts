@@ -4,13 +4,19 @@ import { log } from "./utils";
 export const prefix = "app.sassywares";
 
 export class Storage<T = string> {
-  key: string;
+  readonly key: string;
 
   constructor(key: string) {
     this.key = `${prefix}.${key}`;
   }
 
   get(): T | null {
+    if (isServer) return null;
+
+    return localStorage.getItem(this.key) as T;
+  }
+
+  getParsed(): T | null {
     if (isServer) return null;
 
     const value = localStorage.getItem(this.key);
@@ -23,13 +29,21 @@ export class Storage<T = string> {
     }
   }
 
-  set(value: T): void {
+  set(value: any): void {
     if (isServer) return;
+
+    localStorage.setItem(this.key, JSON.stringify(value));
+  }
+
+  setStringified(value: T): void {
+    if (isServer) return;
+
     localStorage.setItem(this.key, JSON.stringify(value));
   }
 
   remove(): void {
     if (isServer) return;
+
     localStorage.removeItem(this.key);
   }
 }

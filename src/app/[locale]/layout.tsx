@@ -1,6 +1,10 @@
 import { GeistSans } from "geist/font/sans";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, getTranslations } from "next-intl/server";
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from "next-intl/server";
 
 import { getLangDir } from "rtl-detect";
 
@@ -10,18 +14,18 @@ import { QueryClientProvider } from "@/providers/query-client.provider";
 import { ThemeProvider } from "@/providers/theme.provider";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { LayoutProps } from "./types";
 
+import { ProgressBarProvider } from "@/providers/progress-bar.provider";
 import { Toaster } from "sonner";
-import { Progress } from "./progress";
+import { LayoutProps } from "./types";
 
 export function generateStaticParams() {
   return config.i18n.locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({
-  params: { locale },
-}: LayoutProps): Promise<Metadata> {
+export async function generateMetadata(props: LayoutProps): Promise<Metadata> {
+  const { locale } = await props.params;
+
   const t = await getTranslations({ locale, namespace: "metadata" });
 
   return {
@@ -30,10 +34,9 @@ export async function generateMetadata({
   };
 }
 
-export default async function LocaleLayout({
-  children,
-  params: { locale },
-}: LayoutProps) {
+export default async function LocaleLayout({ params, children }: LayoutProps) {
+  const { locale } = await params;
+
   const direction = getLangDir(locale);
 
   // Ensure that the incoming `locale` is valid
@@ -41,19 +44,26 @@ export default async function LocaleLayout({
     notFound();
   }
 
+  // Enable static rendering
+  setRequestLocale(locale);
+
   // Providing all messages to the client side is the easiest way to get started
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
-      <body dir={direction} className={GeistSans.className}>
+    <html lang={locale} suppressHydrationWarning>
+      <body
+        dir={direction}
+        suppressHydrationWarning
+        className={GeistSans.className}
+      >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider enableSystem attribute="class" defaultTheme="system">
             <QueryClientProvider>{children}</QueryClientProvider>
             <Toaster richColors position="top-center" />
           </ThemeProvider>
         </NextIntlClientProvider>
-        <Progress />
+        <ProgressBarProvider />
       </body>
     </html>
   );

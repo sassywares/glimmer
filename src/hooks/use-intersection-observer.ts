@@ -32,7 +32,7 @@ export function useIntersectionObserver(
   const { root = null, threshold = 1, rootMargin = "0px" } = options || {};
 
   const [entry, setEntry] = useState<IntersectionObserverEntry>();
-  const previousObserver = useRef<IntersectionObserver>();
+  const previousObserver = useRef<IntersectionObserver>(undefined);
 
   const customRef = useCallback(
     (node: Element) => {

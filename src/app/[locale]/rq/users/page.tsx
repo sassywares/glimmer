@@ -18,7 +18,7 @@ export default function UsersPage() {
 
   if (isError) return <div>{t("sentences.somethingWentWrong")}</div>;
 
-  if (isLoading) return <div>{t("words.loading")}</div>;
+  if (isLoading) return <div>{t("words.loading")}...</div>;
 
   if (!data) {
     notFound();

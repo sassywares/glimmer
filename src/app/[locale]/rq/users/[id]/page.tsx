@@ -4,12 +4,13 @@ import { userService } from "@/modules/user/user.service";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { notFound } from "next/navigation";
+import { use } from "react";
 
-export default function UserPage({
-  params: { id },
-}: {
-  params: { id: string };
-}) {
+import { PageProps } from "./types";
+
+export default function UserPage(props: PageProps) {
+  const { id } = use(props.params);
+
   const t = useTranslations();
 
   const { data, isError, isLoading } = useQuery({
@@ -19,7 +20,7 @@ export default function UserPage({
 
   if (isError) return <div>{t("sentences.somethingWentWrong")}</div>;
 
-  if (isLoading) return <div>{t("words.loading")}</div>;
+  if (isLoading) return <div>{t("words.loading")}...</div>;
 
   if (!data) {
     notFound();

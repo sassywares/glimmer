@@ -1,7 +1,6 @@
-import { PageWithI18n } from "@/i18n/page-with-i18n";
 import Image from "next/image";
 
-export default PageWithI18n(() => {
+export default function LocalePage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -111,4 +110,4 @@ export default PageWithI18n(() => {
       </div>
     </main>
   );
-});
+}
