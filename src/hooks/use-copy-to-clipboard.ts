@@ -38,5 +38,5 @@ export function useCopyToClipboard(
     }
   }, []);
 
-  return [state, copyToClipboard];
+  return [state, copyToClipboard] as const;
 }

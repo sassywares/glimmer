@@ -8,22 +8,25 @@ import { useSearchParams as useNextSearchParams } from "next/navigation";
  * A hook that supercharges the `useSearchParams` hook from `next/navigation` with some extra functionality
  *
  * @example
- * const { get, set, has, delete } = useSearchParams();
+ * const searchParams = useSearchParams();
  *
- * const redirectUrl = get("redirectUrl");
- * const hasRedirectUrl = has("redirectUrl");
+ * const redirectUrl = searchParams.get("redirectUrl");
+ * const hasRedirectUrl = searchParams.has("redirectUrl");
  *
- * // Set and replace
- * setSearchParams({ redirectUrl: "/home" });
+ * // Set
+ * searchParams.set({ hello: "world" });
  *
  * // Set and navigate
- * setSearchParams({ redirectUrl: "/home" }, "/sign-in");
+ * searchParams.set({ hello: "world" }, "/sassywares");
  *
- * // Delete and replace
- * deleteSearchParams(["redirectUrl"]);
+ * // Delete
+ * searchParams.delete(["hello"]);
+ *
+ * // Delete multiple
+ * searchParams.delete(["hello", "gentlemen"]);
  *
  * // Delete and navigate
- * deleteSearchParams(["redirectUrl"], "/sign-in");
+ * searchParams.delete(["hello"], "/sassywares");
  */
 export function useSearchParams() {
   const router = useRouter();

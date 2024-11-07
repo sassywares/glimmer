@@ -6,13 +6,14 @@ import { getLangDir } from "rtl-detect";
 
 import { config } from "@/config";
 import { routing } from "@/i18n/routing";
-import { QueryClientProvider } from "@/providers/query-client-provider";
-import { ThemeProvider } from "@/providers/theme-provider";
+import { QueryClientProvider } from "@/providers/query-client.provider";
+import { ThemeProvider } from "@/providers/theme.provider";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LayoutProps } from "./types";
 
 import { Toaster } from "sonner";
+import { Progress } from "./progress";
 
 export function generateStaticParams() {
   return config.i18n.locales.map((locale) => ({ locale }));
@@ -52,6 +53,7 @@ export default async function LocaleLayout({
             <Toaster richColors position="top-center" />
           </ThemeProvider>
         </NextIntlClientProvider>
+        <Progress />
       </body>
     </html>
   );
