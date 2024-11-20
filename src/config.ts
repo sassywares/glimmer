@@ -18,8 +18,11 @@ export type Config = {
 
 export const config: Config = (() => {
   const config = {
-    baseUrl: getConfig("BASE_URL", "http://localhost:3000"),
-    serviceUrl: getConfig("BASE_SERVICE_URL", "http://localhost:3000/api/v1"),
+    baseUrl: getConfig("NEXT_PUBLIC_BASE_URL", "http://localhost:3000"),
+    serviceUrl: getConfig(
+      "NEXT_PUBLIC_BASE_SERVICE_URL",
+      "http://localhost:3000/api/v1",
+    ),
     i18n: i18nConfig,
     defaults: {
       staleMilliseconds: 1000 * 60 * 30, // 30 minutes,
@@ -38,7 +41,5 @@ export const config: Config = (() => {
 })();
 
 export function getConfig(key: string, defaultValue = ""): string {
-  const prefixedKey = `NEXT_PUBLIC_${key}`;
-  const value = process.env[prefixedKey];
-  return value ?? defaultValue;
+  return process.env[key] ?? defaultValue;
 }

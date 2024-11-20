@@ -23,7 +23,7 @@ const config: Config = {
     "^@/(.*)$": "<rootDir>/src/$1",
   },
   testPathIgnorePatterns: ["/node_modules/", "/cypress/", "/.next/"],
-  testMatch: ["**/?(*.)+(test).[tj]sx", "**/?(*.)+(test).ts"],
+  testMatch: ["**/?(*.)+(test).tsx", "**/?(*.)+(test).ts"],
 };
 
 export default createJestConfig(config);

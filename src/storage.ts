@@ -1,6 +1,7 @@
 import { isServer } from "@tanstack/react-query";
 import { log } from "./utils";
 
+// Can also come from the config
 export const prefix = "app.sassywares";
 
 export class Storage<T = string> {
@@ -16,7 +17,7 @@ export class Storage<T = string> {
     return localStorage.getItem(this.key) as T;
   }
 
-  getParsed(): T | null {
+  getDeserialized(): T | null {
     if (isServer) return null;
 
     const value = localStorage.getItem(this.key);
@@ -35,13 +36,13 @@ export class Storage<T = string> {
     localStorage.setItem(this.key, JSON.stringify(value));
   }
 
-  setStringified(value: T): void {
+  setSerialized(value: T): void {
     if (isServer) return;
 
     localStorage.setItem(this.key, JSON.stringify(value));
   }
 
-  remove(): void {
+  invalidate(): void {
     if (isServer) return;
 
     localStorage.removeItem(this.key);

@@ -33,7 +33,7 @@ async function with401Redirect(error: AxiosError) {
       await removeTokenFromCookies();
       redirect({ href: routes.signIn(), locale: await getLocale() });
     } else {
-      tokenStorage.remove();
+      tokenStorage.invalidate();
       window.location.href = routes.signIn(window.location.pathname);
     }
   }
