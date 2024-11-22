@@ -9,4 +9,10 @@
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     --font-serif: var(--font-sans);
   }
+
+  *,
+  *::before,
+  *::after {
+    @apply font-sans;
+  }
 }
