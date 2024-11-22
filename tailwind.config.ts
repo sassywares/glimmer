@@ -5,7 +5,6 @@ const config = {
   darkMode: ["class"],
   content: ["./src/**/*.{ts,tsx}"],
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
-
   theme: {
     extend: {
       screens: {
@@ -14,6 +13,10 @@ const config = {
         lg: "1024px",
         xl: "1280px",
         "2xl": "1536px",
+      },
+      fontFamily: {
+        sans: "var(--font-sans)",
+        serif: "var(--font-serif)",
       },
     },
   },
