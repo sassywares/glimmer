@@ -378,6 +378,7 @@ I don't want to bloat Glimmer with things that change between projects, such as 
 
 ## Roadmap
 
+- [ ] Add more hooks 🔥
 - [ ] Add versioning to the project 🔖
 - [ ] Add contribution and merge request guidelines 🤝
 - [ ] Add a guide on how to write tests 🧪

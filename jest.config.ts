@@ -13,17 +13,15 @@ const createJestConfig = nextJest({
 });
 
 const config: Config = {
-  clearMocks: true,
   preset: "ts-jest",
+  testMatch: ["**/?(*.)+(test).tsx", "**/?(*.)+(test).ts"],
+  clearMocks: true,
   collectCoverage: true,
   testEnvironment: "jsdom",
+  moduleNameMapper: { "^@/(.*)$": "<rootDir>/src/$1" },
   coverageDirectory: "<rootDir>/jest/coverage",
   setupFilesAfterEnv: ["<rootDir>/jest/jest.setup.ts"],
-  moduleNameMapper: {
-    "^@/(.*)$": "<rootDir>/src/$1",
-  },
   testPathIgnorePatterns: ["/node_modules/", "/cypress/", "/.next/"],
-  testMatch: ["**/?(*.)+(test).tsx", "**/?(*.)+(test).ts"],
 };
 
 export default createJestConfig(config);

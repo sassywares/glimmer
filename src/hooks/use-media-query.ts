@@ -2,12 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-import { Breakpoint } from "../types";
-
-export function useMediaQuery(breakpoint: Breakpoint): boolean {
-  const mediaQuery = window.matchMedia(
-    `(min-width: ${Breakpoint[breakpoint]}px)`,
-  );
+export function useMediaQuery(breakpoint: number): boolean {
+  const mediaQuery = window.matchMedia(`(min-width: ${breakpoint}px)`);
 
   const [matches, setMatches] = useState(mediaQuery.matches);
 
