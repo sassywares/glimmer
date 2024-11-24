@@ -1,10 +1,10 @@
 import { ComponentPropsWithAsChild } from "@/types";
-import { cn } from "@/utils";
+import { cn, getTransition } from "@/utils";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, VariantProps } from "class-variance-authority";
 import React from "react";
 
-const textVariants = cva("", {
+const textVariants = cva(getTransition(), {
   variants: {
     align: {
       left: "text-left",
@@ -12,6 +12,7 @@ const textVariants = cva("", {
       center: "text-center",
     },
     weight: {
+      light: "font-light",
       normal: "font-normal",
       medium: "font-medium",
       semibold: "font-semibold",
@@ -39,6 +40,15 @@ const textVariants = cva("", {
       lowercase: "lowercase",
       capitalize: "capitalize",
     },
+    underline: {
+      none: "no-underline",
+      hover: "hover:underline underline-offset-4",
+      focus: "focus:underline underline-offset-4",
+      group: "group-hover:underline group-focus:underline underline-offset-4",
+      "group-hover": "group-hover:underline underline-offset-4",
+      "group-focus": "group-focus:underline underline-offset-4",
+      always: "underline underline-offset-4",
+    },
   },
   defaultVariants: {
     align: "left",
@@ -46,6 +56,7 @@ const textVariants = cva("", {
     variant: "p",
     truncate: false,
     transform: "none",
+    underline: "none",
   },
 });
 
@@ -62,6 +73,7 @@ const Text = React.forwardRef<HTMLParagraphElement, TextProps>(
       variant,
       truncate,
       transform,
+      underline,
       asChild = false,
       className,
       ...props
@@ -79,6 +91,7 @@ const Text = React.forwardRef<HTMLParagraphElement, TextProps>(
             variant,
             truncate,
             transform,
+            underline,
             className,
           }),
         )}
