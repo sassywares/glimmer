@@ -1,5 +1,4 @@
 import { ComponentPropsWithAsChild } from "@/types";
-import { cn } from "@/utils";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, VariantProps } from "class-variance-authority";
 import * as React from "react";
@@ -28,12 +27,12 @@ export type TextProps = ComponentPropsWithAsChild<
 >;
 
 const Text = React.forwardRef<HTMLParagraphElement, TextProps>(
-  ({ className, variant, asChild = false, ...props }, ref) => {
+  ({ variant, asChild = false, className, ...props }, ref) => {
     const Comp = asChild ? Slot : "p";
     return (
       <Comp
         ref={ref}
-        className={cn(textVariants({ variant, className }))}
+        className={textVariants({ variant, className })}
         {...props}
       />
     );

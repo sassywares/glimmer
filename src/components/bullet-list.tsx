@@ -9,7 +9,7 @@ export type BulletListProps = ComponentPropsWithAsChild<
 >;
 
 const BulletList = React.forwardRef<HTMLUListElement, BulletListProps>(
-  ({ className, asChild = false, ...props }, ref) => {
+  ({ asChild = false, className, ...props }, ref) => {
     const Comp = asChild ? Slot : "ul";
     return (
       <Comp
