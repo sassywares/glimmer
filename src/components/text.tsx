@@ -11,14 +11,6 @@ const textVariants = cva("", {
       right: "text-right",
       center: "text-center",
     },
-    color: {
-      default: "text-foreground",
-      primary: "text-primary-foreground",
-      secondary: "text-secondary-foreground",
-      accent: "text-accent-foreground",
-      destructive: "text-destructive-foreground",
-      muted: "text-muted-foreground",
-    },
     weight: {
       normal: "font-normal",
       medium: "font-medium",
@@ -50,7 +42,6 @@ const textVariants = cva("", {
   },
   defaultVariants: {
     align: "left",
-    color: "default",
     weight: "normal",
     variant: "p",
     truncate: false,
@@ -64,12 +55,33 @@ export type TextProps = ComponentPropsWithAsChild<
 >;
 
 const Text = React.forwardRef<HTMLParagraphElement, TextProps>(
-  ({ className, variant, asChild = false, ...props }, ref) => {
+  (
+    {
+      align,
+      weight,
+      variant,
+      truncate,
+      transform,
+      asChild = false,
+      className,
+      ...props
+    },
+    ref,
+  ) => {
     const Comp = asChild ? Slot : "p";
     return (
       <Comp
         ref={ref}
-        className={cn(textVariants({ variant, className }))}
+        className={cn(
+          textVariants({
+            align,
+            weight,
+            variant,
+            truncate,
+            transform,
+            className,
+          }),
+        )}
         {...props}
       />
     );
