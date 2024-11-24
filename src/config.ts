@@ -10,9 +10,9 @@ export type Config = {
   serviceUrl: string;
   i18n: typeof i18nConfig;
   defaults: {
-    staleMilliseconds: number;
-    debounceMilliseconds: number;
-    copyTimeoutMilliseconds: number;
+    staleTimeMs: number;
+    copyTimeoutMs: number;
+    debounceIntervalMs: number;
   };
 };
 
@@ -25,9 +25,9 @@ export const config: Config = (() => {
     ),
     i18n: i18nConfig,
     defaults: {
-      staleMilliseconds: 1000 * 60 * 30, // 30 minutes,
-      debounceMilliseconds: 500,
-      copyTimeoutMilliseconds: 3000,
+      staleTimeMs: 1000 * 60 * 30, // 30 minutes,
+      copyTimeoutMs: 3000,
+      debounceIntervalMs: 500,
     },
   } as const;
 

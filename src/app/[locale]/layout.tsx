@@ -60,7 +60,7 @@ export default async function LocaleLayout({ params, children }: LayoutProps) {
     <html lang={locale} suppressHydrationWarning>
       <body dir={direction} suppressHydrationWarning className={Font.className}>
         <NextIntlClientProvider messages={messages}>
-          <ThemeProvider enableSystem attribute="class" defaultTheme="system">
+          <ThemeProvider>
             <QueryClientProvider>{children}</QueryClientProvider>
             <Toaster richColors position="top-center" />
           </ThemeProvider>
