@@ -31,6 +31,19 @@ export function getTransition() {
 }
 
 // =============================================================================
+// Randomizers
+// =============================================================================
+export function randomNumber(multiplier: number) {
+  return Math.floor(Math.random() * multiplier);
+}
+
+export function randomString(length: number) {
+  return Math.random()
+    .toString(36)
+    .substring(2, length + 2);
+}
+
+// =============================================================================
 // Common
 // =============================================================================
 
