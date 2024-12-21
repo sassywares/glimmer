@@ -1,113 +1,101 @@
+import { getLocaleTranslations } from "@/i18n/utils";
 import Image from "next/image";
 
-export default function LocalePage() {
+function Button({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
+    <a
+      rel="noopener noreferrer"
+      href={href}
+      target="_blank"
+      className="inline-flex items-center gap-2 border-2 border-white px-4 py-2 font-semibold text-white shadow-lg outline-none transition-all duration-300 hover:bg-white hover:text-[#DB2777] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#DB2777] focus:ring-offset-2 active:scale-95"
+    >
+      {children}
+    </a>
+  );
+}
+
+export default async function LocalePage() {
+  const t = await getLocaleTranslations();
+
+  const titleId = "title";
+  const descriptionId = "description";
+
+  return (
+    <main className="grid min-h-svh grid-rows-[1fr_auto] bg-[linear-gradient(0deg,_#DB2777_0%,_#FBBF24_100%)] p-6 md:p-10">
+      <section className="flex items-start justify-between">
+        <div className="flex items-center gap-4">
+          <Button href="https://github.com/sassywares/glimmer?tab=readme-ov-file#-glimmer">
+            <svg
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+              <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+              <path d="M9 14v.01" />
+              <path d="M12 14v.01" />
+              <path d="M15 14v.01" />
+            </svg>
+            Docs
+          </Button>
+          <Button href="https://github.com/sassywares/glimmer">
+            <svg
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+            </svg>
+            Github
+          </Button>
+        </div>
+        <div>
           <a
-            target="_blank"
-            rel="noopener noreferrer"
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+            href="https://sassywares.com/"
+            title="By Sassywares"
+            className="text-white"
           >
-            By{" "}
             <Image
-              priority
-              width={100}
-              height={24}
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
+              alt="Sassywares"
+              src="/sassywares.png"
+              width={200}
+              height={200}
+              className="w-20 max-w-40 md:w-[7.5vw]"
             />
           </a>
         </div>
-      </div>
-
-      <div className="before:bg-gradient-radial after:bg-gradient-conic relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          priority
-          width={180}
-          height={37}
-          src="/next.svg"
-          alt="Next.js Logo"
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+      </section>
+      <section aria-labelledby={titleId} aria-describedby={descriptionId}>
+        <h1
+          id={titleId}
+          className="text-[16vw] font-bold leading-[0.85] tracking-tighter text-white"
         >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+          {t("metadata.title")} ✨
+        </h1>
+        <p id={descriptionId} className="mt-8 text-lg text-white md:text-[2vw]">
+          {t("metadata.description")}
+        </p>
+      </section>
     </main>
   );
 }
