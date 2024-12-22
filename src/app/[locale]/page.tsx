@@ -28,7 +28,7 @@ export default async function LocalePage() {
 
   return (
     <main className="grid min-h-svh grid-rows-[1fr_auto] bg-[linear-gradient(0deg,_#DB2777_0%,_#FBBF24_100%)] p-6 md:p-10">
-      <section className="flex items-start justify-between">
+      <section className="flex animate-[fadeInDown_0.5s_ease-in] items-start justify-between">
         <div className="flex items-center gap-4">
           <Button href="https://github.com/sassywares/glimmer?tab=readme-ov-file#-glimmer">
             <svg
@@ -79,12 +79,16 @@ export default async function LocalePage() {
               src="/sassywares.png"
               width={200}
               height={200}
-              className="w-20 max-w-40 md:w-[7.5vw]"
+              className="w-20 max-w-40 animate-[fadeInRight_1s_ease-in] md:w-[7.5vw]"
             />
           </a>
         </div>
       </section>
-      <section aria-labelledby={titleId} aria-describedby={descriptionId}>
+      <section
+        aria-labelledby={titleId}
+        aria-describedby={descriptionId}
+        className="animate-[fadeInUp_0.5s_ease-in]"
+      >
         <h1
           id={titleId}
           className="text-[16vw] font-bold leading-[0.85] tracking-tighter text-white"
