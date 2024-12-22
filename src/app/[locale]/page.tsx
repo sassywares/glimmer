@@ -68,8 +68,10 @@ export default async function LocalePage() {
         </div>
         <div>
           <a
+            rel="noopener noreferrer"
             href="https://sassywares.com/"
             title="By Sassywares"
+            target="_blank"
             className="text-white"
           >
             <Image
