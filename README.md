@@ -2,7 +2,7 @@
 
 # ✨ Glimmer
 
-Next 15 starter with i18n, Testing, React Query, and more • Bring your own UI framework • from the [sassywares](https://sassywares.com) team.
+Next 15 starter with i18n, Testing, React Query, and more • Bring your own UI framework • by the [sassywares](https://sassywares.com) team.
 
 Compatible with Next.js 15.0.0+ and React 19.0.0+
 
